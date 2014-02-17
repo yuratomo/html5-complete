@@ -1,6 +1,24 @@
+" http://www.w3.org/TR/DOM-Level-2-HTML/html.html
 call html5core#namespace('')
 
-call html5core#class('Node', '', [ 
+call html5core#class('_global', '', [ 
+  \ html5core#prop('accesskey', 'number'),
+  \ html5core#prop('class', 'String'),
+  \ html5core#prop('contenteditable', 'String'),
+  \ html5core#prop('contextmenu', 'String'),
+  \ html5core#prop('dir', 'dirString'),
+  \ html5core#prop('draggable', 'boolean'),
+  \ html5core#prop('dropzone', 'dropzoneString'),
+  \ html5core#prop('hidden', 'boolean'),
+  \ html5core#prop('id ', 'String'),
+  \ html5core#prop('lang', 'langString'),
+  \ html5core#prop('spellcheck', 'boolean'),
+  \ html5core#prop('style', 'String'),
+  \ html5core#prop('tabindex', 'number'),
+  \ html5core#prop('title', 'String'),
+  \ ])
+
+call html5core#class('Node', '_global', [ 
   \ html5core#prop('attributes', 'NamedNodeMap'),
   \ html5core#prop('childNodes', 'NodeList'),
   \ html5core#prop('firstChild', 'Node'),
@@ -288,7 +306,7 @@ call html5core#class('Document', 'Node', [
   \ ])
 
 call html5core#class('HTMLDocument', 'Document', [ 
-  \ html5core#prop('al', 'Array'),
+  \ html5core#prop('all', 'Array'),
   \ html5core#prop('anchors', 'HTMLCollection'),
   \ html5core#prop('applets', 'HTMLCollection'),
   \ html5core#prop('body', 'HTMLElement'),
@@ -307,9 +325,9 @@ call html5core#class('HTMLDocument', 'Document', [
   \ html5core#prop('scripts', 'Array'),
   \ html5core#prop('styleSheet', 'Array'),
   \ html5core#prop('title', 'String'),
-  \ html5core#prop('uniqueI', 'String'),
+  \ html5core#prop('uniqueId', 'String'),
   \ html5core#prop('URL', 'String'),
-  \ html5core#prop('windo', 'window'),
+  \ html5core#prop('window', 'window'),
   \ html5core#method('attachEvent(', 'String event, code notify', 'boolean'),
   \ html5core#method('captureEvents(', 'eventTypeList)', 'void'),
   \ html5core#method('close(', ')', 'void'),
@@ -333,16 +351,16 @@ call html5core#class('Element', 'Node', [
 
 call html5core#class('HTMLElement', 'Element', [ 
   \ html5core#prop('childNodes', 'NodeList'),
-  \ html5core#prop('childre', 'Array'),
+  \ html5core#prop('children', 'Array'),
   \ html5core#prop('className', 'String'),
-  \ html5core#prop('currentStyl', 'style'),
-  \ html5core#prop('dir', 'String'),
+  \ html5core#prop('currentStyle', 'style'),
+  \ html5core#prop('dir', 'dirString'),
   \ html5core#prop('document', 'HTMLDocument'),
   \ html5core#prop('filter', 'Array'),
   \ html5core#prop('id', 'String'),
-  \ html5core#prop('innerHTM', 'String'),
-  \ html5core#prop('innerTex', 'String'),
-  \ html5core#prop('lang', 'String'),
+  \ html5core#prop('innerHTML', 'String'),
+  \ html5core#prop('innerText', 'String'),
+  \ html5core#prop('lang', 'langString'),
   \ html5core#prop('offsetHeight', 'number'),
   \ html5core#prop('offsetLeft', 'number'),
   \ html5core#prop('offsetParent', 'number'),
@@ -350,7 +368,7 @@ call html5core#class('HTMLElement', 'Element', [
   \ html5core#prop('offsetWidth', 'number'),
   \ html5core#prop('style', 'style'),
   \ html5core#prop('title', 'String'),
-  \ html5core#prop('uniqueI', 'String'),
+  \ html5core#prop('uniqueId', 'String'),
   \ html5core#method('addBehavior(', 'String url', 'number'),
   \ html5core#method('attachEvent(', 'String event, code notify', 'boolean'),
   \ html5core#method('detachEvent(', 'String event, code notify', 'void'),

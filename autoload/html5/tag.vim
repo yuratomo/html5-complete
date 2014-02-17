@@ -268,6 +268,11 @@ call html5core#class('col', 'HTMLTableColElement', [
 call html5core#class('COL', 'HTMLTableColElement', [ 
   \ ])
 
+call html5core#class('colgroup', 'HTMLTableColElement', [ 
+  \ ])
+call html5core#class('COLGROUP', 'HTMLTableColElement', [ 
+  \ ])
+
 call html5core#class('table', 'HTMLTableElement', [ 
   \ ])
 call html5core#class('TABLE', 'HTMLTableElement', [ 
@@ -305,4 +310,106 @@ call html5core#class('ul', 'HTMLUListElement', [
   \ ])
 call html5core#class('UL', 'HTMLUListElement', [ 
   \ ])
+
+call html5core#class('progress', 'HTMLProgressElement', [ 
+  \ ])
+call html5core#class('PROGRESS', 'HTMLProgressElement', [ 
+  \ ])
+
+call html5core#class('audio', 'HTMLAudioElement', [ 
+  \ ])
+call html5core#class('AUDIO', 'HTMLAudioElement', [ 
+  \ ])
+
+call html5core#class('blockquote', 'HTMLQuoteElement', [ 
+  \ ])
+call html5core#class('BLOCKQUOTE', 'HTMLQuoteElement', [ 
+  \ ])
+
+call html5core#class('canvas', 'HTMLCanvasElement', [ 
+  \ ])
+call html5core#class('CANVAS', 'HTMLCanvasElement', [ 
+  \ ])
+
+call html5core#class('command', 'HTMLCommandElement', [ 
+  \ ])
+call html5core#class('COMMAND', 'HTMLCommandElement', [ 
+  \ ])
+
+call html5core#class('data', 'HTMLDataElement', [ 
+  \ ])
+call html5core#class('DATA', 'HTMLDataElement', [ 
+  \ ])
+
+call html5core#class('datalist', 'HTMLDataListElement', [ 
+  \ ])
+call html5core#class('DATALIST', 'HTMLDataListElement', [ 
+  \ ])
+
+call html5core#class('details', 'HTMLDetailsElement', [ 
+  \ ])
+call html5core#class('DETAILS', 'HTMLDetailsElement', [ 
+  \ ])
+
+call html5core#class('dialog', 'HTMLDialogElement', [ 
+  \ ])
+call html5core#class('DIALOG', 'HTMLDialogElement', [ 
+  \ ])
+ 
+call html5core#class('div', 'HTMLDivElement', [ 
+  \ ])
+call html5core#class('DIV', 'HTMLDivElement', [ 
+  \ ])
+
+call html5core#class('embed', 'HTMLEmbedElement', [ 
+  \ ])
+call html5core#class('EMBED', 'HTMLEmbedElement', [ 
+  \ ])
+
+call html5core#class('keygen', 'HTMLKeygenElement', [ 
+  \ ])
+call html5core#class('KEYGEN', 'HTMLKeygenElement', [ 
+  \ ])
+
+call html5core#class('meter', 'HTMLMeterElement', [ 
+  \ ])
+call html5core#class('METER', 'HTMLMeterElement', [ 
+  \ ])
+
+call html5core#class('output', 'HTMLOutputElement', [ 
+  \ ])
+call html5core#class('OUTPUT', 'HTMLOutputElement', [ 
+  \ ])
+
+call html5core#class('source', 'HTMLSourceElement', [ 
+  \ ])
+call html5core#class('SOURCE', 'HTMLSourceElement', [ 
+  \ ])
+
+call html5core#class('span', 'HTMLSpanElement', [ 
+  \ ])
+call html5core#class('SPAN', 'HTMLSpanElement', [ 
+  \ ])
+
+call html5core#class('th', 'HTMLTableHeaderCellElement', [ 
+  \ ])
+call html5core#class('TH', 'HTMLTableHeaderCellElement', [ 
+  \ ])
+
+call html5core#class('time', 'HTMLTimeElement', [ 
+  \ ])
+call html5core#class('TIME', 'HTMLTimeElement', [ 
+  \ ])
+
+call html5core#class('video', 'HTMLVideoElement', [ 
+  \ ])
+call html5core#class('video', 'HTMLVideoElement', [ 
+  \ ])
+
+for key in [ "abbr", "address", "article", "aside", "b", "base", "bdi", "bdo", "cite", "code", "dd", "dfn", "dt", "em", "figcaption", "figure", "footer", "header", "hgroup", "i", "kbd", "mark", "nav", "noscript", "rp", "rt", "ruby", "samp", "section", "small", "strong", "sub", "sup", "summary", "var", "wbr" ]
+  call html5core#class(key, 'HTMLElement', [ 
+    \ ])
+  call html5core#class(toupper(key), 'HTMLElement', [ 
+    \ ])
+endfor
 
