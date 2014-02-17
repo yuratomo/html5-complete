@@ -1,4 +1,4 @@
-let [ s:TYPE_NAMESPACE, s:TYPE_CLASS, s:TYPE_ENUM , s:TYPE_EVENT, s:TYPE_METHOD, s:TYPE_PROP, s:TYPE_FIELD, s:TYPE_BINDING, s:TYPE_KEYWORD ] = range(9)
+let [ s:TYPE_NAMESPACE, s:TYPE_CLASS, s:TYPE_ENUM , s:TYPE_EVENT, s:TYPE_METHOD, s:TYPE_PROP, s:TYPE_FIELD, s:TYPE_BINDING, s:TYPE_KEYWORD, s:TYPE_CONST ] = range(10)
 let [ s:MODE_NAMESPACE, s:MODE_CLASS, s:MODE_MEMBER, s:MODE_ENUM, s:MODE_NEW_CLASS, s:MODE_EQUAL, s:MODE_STATIC ] = range(7)
 let [ s:ROOT_IS_CLASS, s:ROOT_IS_VAR ] = range(2)
 
@@ -720,6 +720,16 @@ function! html5core#prop(name, class)
     \ }
 endfunction
 
+function! html5core#const(name, value)
+  return {
+    \ 'type'   : s:TYPE_CONST,
+    \ 'kind'   : 'm', 
+    \ 'name'   : a:name,
+    \ 'class'  : a:value,
+    \ 'detail' : a:value,
+    \ }
+endfunction
+
 function! html5core#field(name, class)
   return {
     \ 'type'   : s:TYPE_FIELD,
@@ -766,6 +776,14 @@ endfunction
 
 function! html5core#isMethod(member)
   if a:member.type == s:TYPE_METHOD
+    return 1
+  else
+    return 0
+  endif
+endfunction
+
+function! html5core#isConst(member)
+  if a:member.type == s:TYPE_CONST
     return 1
   else
     return 0

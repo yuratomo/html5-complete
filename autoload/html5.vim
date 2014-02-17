@@ -150,7 +150,7 @@ function! s:attr_completion(tag, base, res)
 
   let item = html5core#getClass(a:tag)
   for member in item.members
-    if member.name =~ '^' . a:base && !html5core#isMethod(member)
+    if member.name =~ '^' . a:base && !html5core#isMethod(member) && !html5core#isConst(member)
       call add(a:res, html5core#member_to_compitem(item.name, member))
     endif
   endfor
