@@ -150,8 +150,12 @@ function! s:attr_completion(tag, base, res)
 
   let item = html5core#getClass(a:tag)
   for member in item.members
-    if member.name =~ '^' . a:base && !html5core#isMethod(member) && !html5core#isConst(member)
-      call add(a:res, html5core#member_to_compitem(item.name, member))
+    if member.name =~ '^' . a:base && ( html5core#isAttr(member) || html5core#isEvent(member) )
+      let m = copy(member)
+      if m.name[-1] != '-'
+        let m.name = m.name . '="'
+      endif
+      call add(a:res, html5core#member_to_compitem(item.name, m))
     endif
   endfor
 
@@ -192,7 +196,9 @@ function! s:value_completion(tag, prop, base, res)
     let enum = html5core#getEnum(mtype.class)
     for member in enum.members
       if member.name =~ '^' . a:base
-        call add(a:res, html5core#member_to_compitem(member.name, member))
+        let m = copy(member)
+        let m.name = m.name . '"'
+        call add(a:res, html5core#member_to_compitem(member.name, m))
       endif
     endfor
   endif
@@ -200,9 +206,9 @@ function! s:value_completion(tag, prop, base, res)
   " if no exists member then append type
   if len(a:res) == 0
     if html5core#isEvent(mtype)
-      call add(a:res, a:tag . '_' . a:prop)
+      call add(a:res, a:tag . '_' . a:prop . '()"')
     else
-      call add(a:res, '//' . mtype.class)
+      call add(a:res, mtype.class)
     endif
   endif
 endfunction

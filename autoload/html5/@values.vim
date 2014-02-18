@@ -48,6 +48,11 @@ call html5core#enum('langString', [
   \ html5core#prop('zh', ''), 
   \ ])
 
+call html5core#enum('scriptLangString', [
+  \ html5core#prop('text/css', ''),
+  \ html5core#prop('text/javascript', ''),
+  \ ])
+
 call html5core#enum('dirString', [
   \ html5core#prop('ltr', ''), 
   \ html5core#prop('rtl', ''), 
@@ -190,3 +195,24 @@ call html5core#enum('charsetString', [
   \ html5core#prop('UTF-8', ''),
   \ html5core#prop('Shift_JIS', ''),
   \ ])
+
+call html5core#enum('accString', 
+  \ map(['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z' ], "html5core#prop(v:val, '')"),
+  \ )
+
+call html5core#enum('httpEquivString', [
+  \ html5core#prop('content-language', ''),
+  \ html5core#prop('content-type', ''),
+  \ html5core#prop('default-style', ''),
+  \ html5core#prop('refresh', ''),
+  \ html5core#prop('set-cookie', ''),
+  \ ])
+
+call html5core#enum('metaString', [
+  \ html5core#prop('application-name', ''),
+  \ html5core#prop('author', ''),
+  \ html5core#prop('description', ''),
+  \ html5core#prop('generator', ''),
+  \ html5core#prop('keywords', ''),
+  \ ])
+

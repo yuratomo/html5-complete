@@ -1,4 +1,4 @@
-let [ s:TYPE_NAMESPACE, s:TYPE_CLASS, s:TYPE_ENUM , s:TYPE_EVENT, s:TYPE_METHOD, s:TYPE_PROP, s:TYPE_FIELD, s:TYPE_BINDING, s:TYPE_KEYWORD, s:TYPE_CONST ] = range(10)
+let [ s:TYPE_NAMESPACE, s:TYPE_CLASS, s:TYPE_ENUM , s:TYPE_EVENT, s:TYPE_METHOD, s:TYPE_PROP, s:TYPE_FIELD, s:TYPE_BINDING, s:TYPE_KEYWORD, s:TYPE_CONST, s:TYPE_ATTR ] = range(11)
 let [ s:MODE_NAMESPACE, s:MODE_CLASS, s:MODE_MEMBER, s:MODE_ENUM, s:MODE_NEW_CLASS, s:MODE_EQUAL, s:MODE_STATIC ] = range(7)
 let [ s:ROOT_IS_CLASS, s:ROOT_IS_VAR ] = range(2)
 
@@ -720,6 +720,16 @@ function! html5core#prop(name, class)
     \ }
 endfunction
 
+function! html5core#attr(name, class)
+  return {
+    \ 'type'   : s:TYPE_ATTR,
+    \ 'kind'   : 'm', 
+    \ 'name'   : a:name,
+    \ 'class'  : a:class,
+    \ 'detail' : '',
+    \ }
+endfunction
+
 function! html5core#const(name, value)
   return {
     \ 'type'   : s:TYPE_CONST,
@@ -784,6 +794,14 @@ endfunction
 
 function! html5core#isConst(member)
   if a:member.type == s:TYPE_CONST
+    return 1
+  else
+    return 0
+  endif
+endfunction
+
+function! html5core#isAttr(member)
+  if a:member.type == s:TYPE_ATTR
     return 1
   else
     return 0
