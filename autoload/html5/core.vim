@@ -2,7 +2,7 @@
 call html5core#namespace('')
 
 call html5core#class('_global', '', [ 
-  \ html5core#attr('id ', 'String'),
+  \ html5core#attr('id', 'String'),
   \ html5core#attr('class', 'String'),
   \ html5core#attr('lang', 'scriptLangString'),
   \ html5core#attr('style', 'String'),
