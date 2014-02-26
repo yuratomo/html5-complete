@@ -1,4 +1,4 @@
-let [ s:MODE_TAG , s:MODE_ATTR, s:MODE_VALUE, s:MODE_BINDING ] = range(4)
+let [ s:MODE_TAG, s:MODE_ENDTAG  , s:MODE_ATTR, s:MODE_VALUE, s:MODE_BINDING ] = range(5)
 let [ s:TAG_KIND_NORMAL, s:TAG_KIND_BRACE ] = range(2)
 let s:complete_mode = s:MODE_TAG
 
@@ -18,8 +18,10 @@ function! html5#complete(findstart, base)
     endwhile
 
     " resolve complete mode [TAG/VALUE/BINDING/ATTR]
-    if line[start - 1] =~ '[<:/]'
+    if line[start - 1] =~ '[<:]'
       let s:complete_mode = s:MODE_TAG
+    elseif line[start - 1] =~ '/'
+      let s:complete_mode = s:MODE_ENDTAG
     elseif line[start - 1] =~ '["=]'
       let s:complete_mode = s:MODE_VALUE
     elseif line[start - 1] == '{'
@@ -35,6 +37,10 @@ function! html5#complete(findstart, base)
       let s:tag = s:find_tag_name()
     elseif start > 2 && s:complete_mode == s:MODE_VALUE
       let eq = strridx(line, '=', start-1)
+      let next_dq = strridx(line, '"', start-2)
+      if next_dq > eq
+        return -3
+      endif
       " start-1   --> "
       if eq != -1
         let prop_end = eq - 1
@@ -58,6 +64,8 @@ function! html5#complete(findstart, base)
           let s:property = line[prop_start : prop_end]
         endif
       endif
+    elseif s:complete_mode == s:MODE_ENDTAG
+      return  xmlcomplete#CompleteTags(a:findstart, a:base)
     endif
     return start
 
@@ -66,9 +74,12 @@ function! html5#complete(findstart, base)
     if s:complete_mode == s:MODE_TAG
       call html5core#class_completion(a:base, res)
 
+    elseif s:complete_mode == s:MODE_ENDTAG
+      return xmlcomplete#CompleteTags(a:findstart, a:base)
+
     elseif s:complete_mode == s:MODE_ATTR
       if s:tag_kind == s:TAG_KIND_NORMAL
-        call s:attr_completion(s:tag, a:base, res)
+        call html5#attr_completion(s:tag, a:base, res, "=")
 
       elseif s:tag_kind == s:TAG_KIND_BRACE
         call s:bind_attr_completion(s:tag, a:base, res)
@@ -143,7 +154,7 @@ function! s:find_tag_name()
   return substitute(tag, '.*:', '', '')
 endfunction
 
-function! s:attr_completion(tag, base, res)
+function! html5#attr_completion(tag, base, res, append)
   if !html5core#isClassExist(a:tag)
     return
   endif
@@ -153,7 +164,7 @@ function! s:attr_completion(tag, base, res)
     if member.name =~ '^' . a:base && ( html5core#isAttr(member) || html5core#isEvent(member) )
       let m = copy(member)
       if m.name[-1] != '-'
-        let m.name = m.name . '="'
+        let m.name = m.name . a:append
       endif
       call add(a:res, html5core#member_to_compitem(item.name, m))
     endif
@@ -161,7 +172,7 @@ function! s:attr_completion(tag, base, res)
 
   " find super class member
   if item.extend != ''
-    call s:attr_completion(item.extend, a:base, a:res)
+    call html5#attr_completion(item.extend, a:base, a:res, a:append)
   endif
 endfunction
 
